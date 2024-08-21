@@ -1,0 +1,49 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: black;
+    row-gap: 50px;
+    margin-top: 70px;
+}
+.title{
+    align-items: center;    
+    margin: auto;
+    font-size: 40px;
+}
+
+.imgHotel{
+    border-radius: 8px;
+}
+
+.rating{
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.txtRating, .txtDescription{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.descriptionHotel, .reviews{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    flex-direction: row;
+    row-gap: 20px;
+    text-align: center;
+}
+
+.reviews{
+    width: 81%;
+}
+
+
+.dataHotel{
+    display: flex;
+    align-items: center;
+}
