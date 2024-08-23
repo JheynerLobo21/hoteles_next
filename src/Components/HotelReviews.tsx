@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { Review } from "@/types/interfaceHotel";
 import Loading from "@/Components/loading";
-import Reviews from "./Reviews";
+import Reviews from "../app/[hotelId]/Reviews";
 
 interface Prop {
   hotelId: number;

@@ -1,7 +1,8 @@
 import styles from "./styles.module.css";
-import HotelReviews from "./HotelReviews";
+import HotelReviews from "../../Components/HotelReviews";
 import BasicBreadcrumbs from "@/Components/Breadchumbs";
 import CardHotel from "@/Components/CardHotel";
+import {reviewsForHotel} from "@/Utils/peticions";
 
 export default async function DetailHotel({
   params,
@@ -11,12 +12,7 @@ export default async function DetailHotel({
 
   const hotelId = parseInt(params.hotelId);
   //const hotel = await fetch(`/api/hotels/${hotelId}`).then(res => res.json());
-  const hotel = await fetch(
-    `https://my-json-server.typicode.com/manuelmebm/testing-hotel-api/hotels/${hotelId}`,
-    {
-      method: "GET",
-    }
-  ).then((res) => res.json());
+  const hotel = await reviewsForHotel(hotelId);
   return (
     <>
       <main className={styles.main}>

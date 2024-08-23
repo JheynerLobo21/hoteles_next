@@ -10,6 +10,7 @@ import Rating from "@mui/material/Rating";
 import CloseIcon from '@mui/icons-material/Close';
 import { Review } from "@/types/interfaceHotel";
 import styles from '@/app/page.module.css';
+import { saveReview } from "@/Utils/peticions";
 
 const style = {
   position: "absolute" as "absolute",
@@ -62,17 +63,8 @@ export default function RegistreReview({ hotelId, addReview }: Prop) {
   const handleAddReview = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.title && formData.description && formData.rating) {
-      const response = await fetch("/api/reviews", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-
-      });
-      console.log(response.status)
-      const newReview = await response.json();
-      addReview(newReview);
+      saveReview(formData);
+      addReview(formData);
       handleClose();
     }
   };
