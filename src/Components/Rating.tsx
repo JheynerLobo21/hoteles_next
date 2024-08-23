@@ -15,7 +15,7 @@ export default function BasicRating({rating}:Prop) {
     <Box
     className={styles.rate}
       sx={{
-        '& > legend': { mt: 4 },
+        '& > legend': { mt: 2 },
       }}
     >
       <Typography component="legend"></Typography>
