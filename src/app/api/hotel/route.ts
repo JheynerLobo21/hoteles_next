@@ -4,7 +4,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   const hotelId = params.id;
 
   const response = await fetch(
-    `https://my-json-server.typicode.com/manuelmebm/testing-hotel-api/hotels/`
+    `https://my-json-server.typicode.com/manuelmebm/testing-hotel-api/hotels/${hotelId}`
   );
 
   if (!response.ok) {

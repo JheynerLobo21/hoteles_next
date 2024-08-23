@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { Review } from "@/types/interfaceHotel";
+import Loading from "@/Components/loading";
 import Reviews from "./Reviews";
 
 interface Prop {
@@ -9,6 +10,7 @@ interface Prop {
 }
 
 export default function HotelReviews({ hotelId }: Prop) {
+
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
@@ -26,8 +28,13 @@ export default function HotelReviews({ hotelId }: Prop) {
   };
 
   return (
-    <div>
-      <Reviews reviews={reviews} hotelId={hotelId} addReview={addReview} />
-    </div>
+    <>
+      {reviews.length > 0 ? (
+        <Reviews reviews={reviews} hotelId={hotelId} addReview={addReview} />
+      ) : (
+        <Loading />
+      )}
+    </>
   );
+  
 }

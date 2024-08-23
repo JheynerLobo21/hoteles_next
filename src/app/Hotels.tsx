@@ -13,7 +13,7 @@ export default async function Hotels() {
   }
 
   const hotels: Hotel[] = await res.json();
-
+  console.log(hotels);
   return hotels.map((hotel: Hotel) => (
     <CardHotel hotel={hotel} key={hotel.id} />
   ));
