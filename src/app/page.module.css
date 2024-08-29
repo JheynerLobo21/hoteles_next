@@ -111,24 +111,6 @@
   position: relative;
 }
 
-.itemHotel{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding-bottom: 0;
-}
-
-.dataHotel{
-  margin-left: 22px;
-}
-
-.cardDataHotel{
-  border-radius: 5px;
-  margin-bottom: 15px;
-  width: 80vw;
-  padding: 0 22px;
-}
-
 .css-46bh2p-MuiCardContent-root:last-child{
   margin-bottom: 0;
 }
@@ -142,21 +124,6 @@
   transform: scale(1.01);
 }
 
-.nameRating{
-  display: flex;
-  align-items: center;
-  column-gap: 9px;
-}
-
-.titleHotel{
-  color: #2724db;
-  font-size: 30px;
-}
-
-.titleHotel:hover{
-  color: #04027c;
-}
-
 .listReviews{
   position: relative;
   margin-bottom: 20px;
@@ -164,25 +131,7 @@
 }
 
 .titleAdd{
-  margin-left: -10px;
-}
-
-.containerReviews{
-  display: flex;
-  width: 100%;
-  padding: 0;
-}
-
-.titleRateReviews{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  border-radius: 8px 0 0 8px;
-  border: 1px solid #808080;
-  width: 30%;
-  text-overflow: ellipsis;
+  margin-right: 5px;
 }
 
 .addReview{
@@ -199,96 +148,6 @@
   .addReview:hover{
     background-color: #04027c;
   }
-
-  .contentModal{
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .btnAddReview{
-    color: #fff;
-  }
-
-.cardReview{
-  border: none;
-  box-shadow: none;
-  margin-top: 15px;
-}
-
-.descriptionReview{
-  border: 1px solid #808080;
-  border-radius: 0 8px 8px 0;
-  margin-right: 1px;
-  font-size: 14px;
-  display: flex;
-  flex-direction:column;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  text-overflow: ellipsis;
-}
-
-.txtDescriptionReview{
-  font-size: 18px;
-  font-weight: bold;
-  color: #3a3a3a;
-}
-
-.form{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  row-gap:12px;
-}
-
-.titReview, .descripReview, .scoreReview{
-  display:flex;
-  flex-direction:column;
-  width:100%;
-  margin:auto;
-}
-
-.scoreReview{
-  align-items:center;
-}
-
-.containerBtnNewReview{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.btnNewReview{
-  margin-top:15px;
-  background-color:#2724db;
-  color:#fff;
-  border-radius: 6px;
-  padding: 10px 16px;
-  width: 100px;
-}
-
-.titleApp{
-  margin-top: -50px;
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 28px;
-}
-
-.close{
-  position: absolute;
-  right: 28px;
-  top: 15px;
-  cursor: pointer;
-}
-
-.titleModal{
-  margin-top: -10px;
-  margin-bottom: 14px;
-}
-
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
@@ -383,36 +242,7 @@
     );
     z-index: 1;
   }
-  .itemHotel{
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .nameRating{
-    flex-direction: column;
-  }
-  .dataHotel{
-    margin-left: 0;
-  }
-  .containerReviews{
-    flex-direction: column;
-    width: 90%;
-  }
-  .titleRateReviews{
-    width: 70%;
-    border-radius: 8px 8px 0 0;
-  }
-  .descriptionReview{
-    border-radius: 0 0 8px 8px;
-    margin-top: -1px;
-    height: 100px;
-    overflow: scroll;
-    padding: 0 10px;
-    text-align: center;
-  }
-  .addReview{
-    right: 180px;
-  }
+  
 }
 
 /* Tablet and Smaller Desktop */

@@ -7,6 +7,7 @@ import { Review } from "@/types/interfaceHotel";
 import styles from "@/app/page.module.css";
 import RegistreReview from "./RegistreReview";
 import BasicRating from "@/Components/Rating";
+import { containerReviews, cardReview, titleRateReviews, descriptionReview, txtDescriptionReview } from "@/styles/styles";
 
 interface Prop {
   reviews: Review[];
@@ -29,18 +30,17 @@ export default function Reviews({ reviews, hotelId, addReview }: Prop) {
     <section className={styles.listReviews}>
       <div className={styles.titleAdd}>
         <h2>Reseñas del Hotel</h2>
-        <RegistreReview hotelId={hotelId} addReview={addReview} />
+        <RegistreReview hotelId={hotelId} addReview={addReview}/>
       </div>
       {reviews.map((review) => (
         <Card
-          sx={{ minWidth: 550 }}
           key={review.id}
-          className={styles.cardReview}
+          sx={cardReview}
         >
-          <CardContent className={styles.containerReviews}>
+          <CardContent sx={containerReviews}>
             <Typography
               component={"section"}
-              className={styles.titleRateReviews}
+              sx={titleRateReviews}
             >
               <h3>Título: {review.title}</h3>
               <label>Calificación:</label>
@@ -48,10 +48,10 @@ export default function Reviews({ reviews, hotelId, addReview }: Prop) {
             </Typography>
             <Typography
               component={"section"}
-              className={styles.descriptionReview}
+              sx={descriptionReview}
             >
-              <label className={styles.txtDescriptionReview}>Descripción</label>
-              <label>{review.description}</label>
+              <Typography component={'label'} sx={txtDescriptionReview}>Descripción</Typography>
+              <Typography component={'label'}>{review.description}</Typography>
             </Typography>
           </CardContent>
         </Card>

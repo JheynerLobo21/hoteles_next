@@ -7,55 +7,8 @@
     row-gap: 50px;
     margin-top: 20px;
 }
-.title{
-    align-items: center;    
-    margin: auto;
-    font-size: 40px;
-}
 
 .imgHotel{
     border-radius: 8px;
 }
 
-.rating{
-    display: flex;
-    column-gap: 20px;
-    align-items: center;
-    justify-content: center;
-}
-
-.txtRating, .txtDescription{
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.descriptionHotel, .reviews{
-    display: flex;
-    align-items: center;
-    width: 80%;
-    flex-direction: row;
-    row-gap: 20px;
-    text-align: center;
-    margin-top: -30px;
-}
-
-.dataHotel{
-    display: flex;
-    align-items: center;
-}
-
-.infoHotel{
-    padding-left: 20px;
-}
-
-@media (max-width: 768px){
-    .descriptionHotel{
-        flex-direction: column;
-    }
-    .reviews{
-        text-align: start;
-    }
-    .infoHotel{
-        padding-left: 0;
-    }
-}

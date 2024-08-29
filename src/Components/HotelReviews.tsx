@@ -24,7 +24,7 @@ export default function HotelReviews({ hotelId }: Prop) {
   };
 
   return (
-      <Reviews reviews={query.data ?? []} hotelId={hotelId} addReview={addReview} />
+      <Reviews reviews={query.data} hotelId={hotelId} addReview={addReview}/>
   );
 }
 

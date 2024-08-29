@@ -8,14 +8,15 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Hotel } from "@/types/interfaceHotel";
 import styles from "@/app/page.module.css";
+import {itemHotel, cardDataHotel, nameRating, titleHotel, dataHotel} from "@/styles/styles";
 import Image from "next/image";
 import Link from "next/link";
 import BasicRating from "@/Components/Rating";
 
 export default function CardHotel({ hotel }: Prop) {
   return (
-    <Card className={styles.cardDataHotel}>
-      <CardContent key={hotel.id} className={styles.itemHotel}>
+    <Card sx={cardDataHotel}>
+      <CardContent key={hotel.id} sx={itemHotel}>
         <Typography gutterBottom>
           <Image
             className={styles.imgHotel}
@@ -25,15 +26,17 @@ export default function CardHotel({ hotel }: Prop) {
             height={200}
           />
         </Typography>
-        <div className={styles.dataHotel}>
-          <Typography component={'span'} className={styles.nameRating}>
+        <Typography component={'div'} sx={dataHotel}>
+          <Typography component={'span'} sx={nameRating}>
             <Link href={`/${hotel.id}`}>
-              <h2 className={styles.titleHotel}>{hotel.title}</h2>
+            <Typography component={'h2'} sx={titleHotel}>
+            {hotel.title}
+            </Typography>
             </Link>
             <BasicRating rating={hotel.rating} />
           </Typography>
           <Typography component={'span'} variant="body2">{hotel.description}</Typography>
-        </div>
+        </Typography>
       </CardContent>
     </Card>
   );

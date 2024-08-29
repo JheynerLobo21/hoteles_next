@@ -9,7 +9,10 @@ import TextField from "@mui/material/TextField";
 import Rating from "@mui/material/Rating";
 import CloseIcon from '@mui/icons-material/Close';
 import { Review } from "@/types/interfaceHotel";
+import { btnAddReview } from "@/styles/styles";
 import styles from '@/app/page.module.css';
+import { form, close } from "@/styles/styles";
+import { reviewField, scoreReview, containerBtnNewReview, btnNewReview, titleModal, divScoreReview} from "@/styles/styles"
 
 
 const style = {
@@ -22,12 +25,16 @@ const style = {
   boxShadow: 24,
   borderRadius: 3,
   p: 4,
+  color: 'black',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
 };
 
 interface Prop {
   hotelId: number;
   addReview: (review: Review) => void;
-  
 }
 
 export default function RegistreReview({ hotelId, addReview }: Prop) {
@@ -72,7 +79,7 @@ export default function RegistreReview({ hotelId, addReview }: Prop) {
 
   return (
     <div className={styles.addReview}>
-      <Button onClick={handleOpen} className={styles.btnAddReview}>
+      <Button onClick={handleOpen} sx={btnAddReview}>
         Agregar Reseña
       </Button>
       <Modal
@@ -81,20 +88,20 @@ export default function RegistreReview({ hotelId, addReview }: Prop) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} className={styles.contentModal}>
-        <CloseIcon className={styles.close} onClick={handleClose}/>
-          <Typography className={styles.titleModal} id="modal-modal-title" variant="h6" component="h2">
+        <Box sx={style}>
+        <CloseIcon sx={close} onClick={handleClose}/>
+          <Typography sx={titleModal} id="modal-modal-title" variant="h6" component="h2">
             Registre una reseña
           </Typography>
-          <form className={styles.form} onSubmit={handleAddReview}>
+          <Typography component={'form'} sx={form} onSubmit={handleAddReview}>
             <div>
-              <label htmlFor="title-review" className={styles.titReview}>
+              <Typography component={'label'} htmlFor="title-review" sx={reviewField}>
                 Título de la reseña
-                <TextField id="title" type="text" onChange={handleForm} />
-              </label>
+                <TextField id="title" type="text" onChange={handleForm} required/>
+              </Typography>
             </div>
             <div>
-              <label htmlFor="description-review" className={styles.descripReview}>
+              <Typography component={'label'} htmlFor="description-review" sx={reviewField}>
                 Descripción de la reseña
                 <TextField
                   id="description"
@@ -102,11 +109,12 @@ export default function RegistreReview({ hotelId, addReview }: Prop) {
                   multiline
                   maxRows={4}
                   onChange={handleForm}
+                  required
                 />
-              </label>
+              </Typography>
             </div>
-            <div>
-              <label htmlFor="score-review" className={styles.scoreReview}>
+            <Typography component={'div'} sx={divScoreReview}>
+              <Typography component={'label'} htmlFor="score-review" sx={scoreReview}>
                 Valoración de la reseña
                 <Rating
                   name="simple-controlled"
@@ -114,18 +122,19 @@ export default function RegistreReview({ hotelId, addReview }: Prop) {
                   onChange={handleRatingChange}
                   id="rating"
                 />
-              </label>
-            </div>
-            <div className={styles.containerBtnNewReview}>
+              </Typography>
+            </Typography>
+            
+            <Typography component={'div'} sx={containerBtnNewReview}>
               <Button
                 variant="contained"
-                className={styles.btnNewReview}
+                sx={btnNewReview}
                 type="submit"
               >
                 Agregar
               </Button>
-            </div>
-          </form>
+            </Typography>
+          </Typography>
         </Box>
       </Modal>
     </div>

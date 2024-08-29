@@ -1,9 +1,11 @@
-import styles from "./styles.module.css";
+import {descriptionHotelStyles, reviewsStyles} from "@/styles/styles";
 import HotelReviews from "../../Components/HotelReviews";
 import BasicBreadcrumbs from "@/Components/Breadchumbs";
 import CardHotel from "@/Components/CardHotel";
 import { reviewsForHotel } from "@/Utils/peticions";
 import ClientProvider from "./ClientProvider";
+import { Typography } from "@mui/material";
+import styles from "./styles.module.css";
 
 export default async function DetailHotel({
   params,
@@ -16,14 +18,14 @@ export default async function DetailHotel({
     <>
       <main className={styles.main}>
         <BasicBreadcrumbs hotelTitle={hotel?.title} hotelId={hotel?.id} />
-        <section className={styles.descriptionHotel}>
+        <Typography component={'section'} sx={descriptionHotelStyles}>
           <CardHotel hotel={hotel} />
-        </section>
-        <section className={styles.reviews}>
+        </Typography>
+        <Typography component={'section'} sx={reviewsStyles}>
           <ClientProvider>
             <HotelReviews hotelId={hotel.id} />
           </ClientProvider>
-        </section>
+        </Typography>
       </main>
     </>
   );
