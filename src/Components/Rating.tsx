@@ -9,7 +9,6 @@ interface Prop {
 }
 
 export default function BasicRating({rating}:Prop) {
-  const [value, setValue] = React.useState<number | null>(2);
 
   return (
     <Box

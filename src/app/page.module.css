@@ -112,17 +112,25 @@
 }
 
 .itemHotel{
-  border: 1px solid #bbb;
   display: flex;
   flex-direction: row;
-  padding: 22px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  width: 80vw;
+  justify-content: center;
+  padding-bottom: 0;
 }
 
 .dataHotel{
   margin-left: 22px;
+}
+
+.cardDataHotel{
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: 80vw;
+  padding: 0 22px;
+}
+
+.css-46bh2p-MuiCardContent-root:last-child{
+  margin-bottom: 0;
 }
 
 .imgHotel{

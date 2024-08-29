@@ -1,9 +1,10 @@
 "use client";
-
-import React, { useState, useEffect, Suspense } from "react";
 import { Review } from "@/types/interfaceHotel";
 import Loading from "@/Components/loading";
 import Reviews from "../app/[hotelId]/Reviews";
+import { useHotelReviewsQuery } from "@/hooks/useHotelReviewQuery";
+import { useHotelReviewsMutation } from "@/hooks/useHotelReviewMutation";
+
 
 interface Prop {
   hotelId: number;
@@ -11,30 +12,20 @@ interface Prop {
 
 export default function HotelReviews({ hotelId }: Prop) {
 
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const {query} = useHotelReviewsQuery(hotelId);
+  const {mutation} = useHotelReviewsMutation(hotelId);
+  
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      const fetchedReviews: Review[] = await fetch(
-        `/api/reviews/?hotelId=${hotelId}`
-      ).then((res) => res.json());
-      setReviews(fetchedReviews);
-    };
-    fetchReviews();
-  }, [hotelId]);
+  if (query.isLoading) return <Loading />;
+  if (query.error) return <div>Lo sentimos, hubo un error</div>;
 
   const addReview = (newReview: Review) => {
-    setReviews((prevReviews) => [...prevReviews, newReview]);
+    mutation.mutate(newReview);
   };
 
   return (
-    <>
-      {reviews.length > 0 ? (
-        <Reviews reviews={reviews} hotelId={hotelId} addReview={addReview} />
-      ) : (
-        <Loading />
-      )}
-    </>
+      <Reviews reviews={query.data ?? []} hotelId={hotelId} addReview={addReview} />
   );
-  
 }
+
+
