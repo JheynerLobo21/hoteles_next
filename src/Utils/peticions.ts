@@ -17,9 +17,26 @@ export async function addReview(formData: Review) {
     },
     body: JSON.stringify(formData),
   });
+  console.log(response.status)
+  return await response.json();
+}
+
+export async function editReview(formData: Review) {
+  const response = await fetch("/api/reviews", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+  
+  if (!response.ok) {
+    throw new Error("Failed to update review");
+  }
   console.log(response.status);
   return await response.json();
 }
+
 
 export async function getHotels() {
   const baseUrl = "http://localhost:3000";
@@ -44,7 +61,6 @@ export async function saveReview(formData: Review) {
     },
     body: JSON.stringify(formData),
   });
-  console.log(response.status)
 }
 
 export async function getReviewsByIdHotel(hotelId: number) {

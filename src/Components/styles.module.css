@@ -1,12 +1,3 @@
-
-.breadchumbs{
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: start;
-    width: 80%;
-  }
-
 .loader {
       width: 35px;
       aspect-ratio: 1;

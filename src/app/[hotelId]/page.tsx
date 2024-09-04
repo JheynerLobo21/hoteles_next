@@ -1,11 +1,12 @@
-import {descriptionHotelStyles, reviewsStyles} from "@/styles/styles";
+import {descriptionHotelStyles, reviewsStyles, mainHotelItem} from "@/styles/styles";
 import HotelReviews from "../../Components/HotelReviews";
 import BasicBreadcrumbs from "@/Components/Breadchumbs";
 import CardHotel from "@/Components/CardHotel";
 import { reviewsForHotel } from "@/Utils/peticions";
 import ClientProvider from "./ClientProvider";
-import { Typography } from "@mui/material";
-import styles from "./styles.module.css";
+import { Box, Container } from "@mui/material";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 
 export default async function DetailHotel({
   params,
@@ -16,17 +17,18 @@ export default async function DetailHotel({
   const hotel = await reviewsForHotel(hotelId);
   return (
     <>
-      <main className={styles.main}>
+      <Container sx={mainHotelItem}>
         <BasicBreadcrumbs hotelTitle={hotel?.title} hotelId={hotel?.id} />
-        <Typography component={'section'} sx={descriptionHotelStyles}>
+        <Box sx={descriptionHotelStyles}>
           <CardHotel hotel={hotel} />
-        </Typography>
-        <Typography component={'section'} sx={reviewsStyles}>
+        </Box>
+        <Box sx={reviewsStyles}>
           <ClientProvider>
             <HotelReviews hotelId={hotel.id} />
+            <ReactQueryDevtools initialIsOpen={false} />
           </ClientProvider>
-        </Typography>
-      </main>
+        </Box>
+      </Container>
     </>
   );
 }

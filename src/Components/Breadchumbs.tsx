@@ -2,7 +2,8 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
-import styles from './styles.module.css'
+import { breadchumbs } from '@/styles/styles';
+import { Box } from '@mui/material';
 
 
 interface Prop {
@@ -12,7 +13,7 @@ interface Prop {
 
 export default function BasicBreadcrumbs({hotelTitle, hotelId}:Prop) {
   return (
-    <div role="presentation" className={styles.breadchumbs}>
+    <Box sx={breadchumbs}>
       <Breadcrumbs aria-label="breadcrumb">
         <Link underline="hover" color="inherit" href="/">
             List hotels
@@ -20,6 +21,6 @@ export default function BasicBreadcrumbs({hotelTitle, hotelId}:Prop) {
           <Typography color="text.primary">Hotel: {hotelTitle}</Typography>
         
       </Breadcrumbs>
-    </div>
+    </Box>
   );
 }

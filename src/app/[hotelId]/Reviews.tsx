@@ -4,15 +4,16 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Review } from "@/types/interfaceHotel";
-import styles from "@/app/page.module.css";
 import RegistreReview from "./RegistreReview";
 import BasicRating from "@/Components/Rating";
-import { containerReviews, cardReview, titleRateReviews, descriptionReview, txtDescriptionReview } from "@/styles/styles";
+import { containerReviews, cardReview, txtTitleDescriptionReview, titleRateReviews, descriptionReview, txtDescriptionReview, listReviews, titleAdd } from "@/styles/styles";
+import { FormLabel } from "@mui/material";
 
 interface Prop {
   reviews: Review[];
   hotelId: number;
   addReview: (review: Review) => void;
+  editReview: (review: Review) => void;
 }
 
 const bull = (
@@ -24,15 +25,15 @@ const bull = (
   </Box>
 );
 
-export default function Reviews({ reviews, hotelId, addReview }: Prop) {
-  console.log(reviews);
+export default function Reviews({ reviews, hotelId, addReview, editReview }: Prop) {
   return (
-    <section className={styles.listReviews}>
-      <div className={styles.titleAdd}>
-        <h2>Reseñas del Hotel</h2>
-        <RegistreReview hotelId={hotelId} addReview={addReview}/>
-      </div>
+    <Box sx={listReviews}>
+      <Box sx={titleAdd}>
+        <Typography variant='h5'>Reseñas del Hotel</Typography>
+        <RegistreReview hotelId={hotelId} editReview={editReview} addReview={addReview} review={null}/>
+      </Box>
       {reviews.map((review) => (
+        
         <Card
           key={review.id}
           sx={cardReview}
@@ -42,20 +43,21 @@ export default function Reviews({ reviews, hotelId, addReview }: Prop) {
               component={"section"}
               sx={titleRateReviews}
             >
-              <h3>Título: {review.title}</h3>
-              <label>Calificación:</label>
+              <Typography variant='h6'>Título: {review.title}</Typography>
+              <FormLabel >Calificación:</FormLabel >
               <BasicRating rating={review.rating} />
             </Typography>
-            <Typography
+            <Box
               component={"section"}
               sx={descriptionReview}
             >
-              <Typography component={'label'} sx={txtDescriptionReview}>Descripción</Typography>
-              <Typography component={'label'}>{review.description}</Typography>
-            </Typography>
+              <RegistreReview hotelId={hotelId} editReview={editReview}addReview={addReview} review={review} />
+              <Typography component={'label'} sx={txtTitleDescriptionReview}>Descripción</Typography>
+              <Typography sx={txtDescriptionReview} component={'label'}>{review.description}</Typography>
+            </Box>
           </CardContent>
         </Card>
       ))}
-    </section>
+    </Box>
   );
 }

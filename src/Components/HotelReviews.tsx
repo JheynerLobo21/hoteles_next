@@ -3,7 +3,8 @@ import { Review } from "@/types/interfaceHotel";
 import Loading from "@/Components/loading";
 import Reviews from "../app/[hotelId]/Reviews";
 import { useHotelReviewsQuery } from "@/hooks/useHotelReviewQuery";
-import { useHotelReviewsMutation } from "@/hooks/useHotelReviewMutation";
+import { useHotelReviewsMutation, useUpdateHotelReviewQuery } from "@/hooks/useHotelReviewMutation";
+import { Typography } from "@mui/material";
 
 
 interface Prop {
@@ -12,19 +13,24 @@ interface Prop {
 
 export default function HotelReviews({ hotelId }: Prop) {
 
-  const {query} = useHotelReviewsQuery(hotelId);
-  const {mutation} = useHotelReviewsMutation(hotelId);
-  
+  const {data, isLoading, isError} = useHotelReviewsQuery(hotelId);
+  const {mutate: reviewAdd} = useHotelReviewsMutation(hotelId);
+  const {mutate: reviewUpdate} = useUpdateHotelReviewQuery(hotelId);
 
-  if (query.isLoading) return <Loading />;
-  if (query.error) return <div>Lo sentimos, hubo un error</div>;
+
+  if (isLoading) return <Loading />;
+  if (isError) return <Typography component={'p'}>Lo sentimos, hubo un error</Typography>;
 
   const addReview = (newReview: Review) => {
-    mutation.mutate(newReview);
+    reviewAdd(newReview);
   };
 
+  const editReview = (reviewUpdated: Review) =>{
+    reviewUpdate(reviewUpdated);
+  }
+
   return (
-      <Reviews reviews={query.data} hotelId={hotelId} addReview={addReview}/>
+      <Reviews  reviews={data} hotelId={hotelId} editReview={editReview} addReview={addReview}/>
   );
 }
 

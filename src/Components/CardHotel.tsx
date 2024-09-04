@@ -12,6 +12,7 @@ import {itemHotel, cardDataHotel, nameRating, titleHotel, dataHotel} from "@/sty
 import Image from "next/image";
 import Link from "next/link";
 import BasicRating from "@/Components/Rating";
+import { Box } from "@mui/material";
 
 export default function CardHotel({ hotel }: Prop) {
   return (
@@ -26,17 +27,17 @@ export default function CardHotel({ hotel }: Prop) {
             height={200}
           />
         </Typography>
-        <Typography component={'div'} sx={dataHotel}>
+        <Box sx={dataHotel}>
           <Typography component={'span'} sx={nameRating}>
             <Link href={`/${hotel.id}`}>
-            <Typography component={'h2'} sx={titleHotel}>
+            <Typography variant='h2' sx={titleHotel}>
             {hotel.title}
             </Typography>
             </Link>
             <BasicRating rating={hotel.rating} />
           </Typography>
           <Typography component={'span'} variant="body2">{hotel.description}</Typography>
-        </Typography>
+        </Box>
       </CardContent>
     </Card>
   );

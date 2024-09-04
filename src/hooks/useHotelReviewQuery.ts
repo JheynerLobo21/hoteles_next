@@ -5,12 +5,16 @@ import { Review } from "@/types/interfaceHotel";
 
 export function useHotelReviewsQuery(hotelId: number) {
 
-  const query = useQuery<Review[]>({
+  return useQuery<Review[]>({
     queryKey: ['reviews', hotelId],
     queryFn: () => getReviewsByIdHotel(hotelId),
     refetchOnWindowFocus: false,
     initialData: []
   });
-
-  return { query };
 }
+// export function useUpdateHotelReviewQuery(review: Review){
+//   return useQuery<Review>({
+//     queryKey: ['reviews', review.title, review.id],
+//     queryFn: () => editReview(review),
+//   })
+// }
