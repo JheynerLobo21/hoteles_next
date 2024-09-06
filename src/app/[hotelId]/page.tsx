@@ -1,5 +1,5 @@
 import {descriptionHotelStyles, reviewsStyles, mainHotelItem} from "@/styles/styles";
-import HotelReviews from "../../Components/HotelReviews";
+import HotelReviewsManager from "../../Components/HotelReviewsManager";
 import BasicBreadcrumbs from "@/Components/Breadchumbs";
 import CardHotel from "@/Components/CardHotel";
 import { reviewsForHotel } from "@/Utils/peticions";
@@ -20,11 +20,11 @@ export default async function DetailHotel({
       <Container sx={mainHotelItem}>
         <BasicBreadcrumbs hotelTitle={hotel?.title} hotelId={hotel?.id} />
         <Box sx={descriptionHotelStyles}>
-          <CardHotel hotel={hotel} />
+          <CardHotel hotel={hotel}/>
         </Box>
         <Box sx={reviewsStyles}>
           <ClientProvider>
-            <HotelReviews hotelId={hotel.id} />
+            <HotelReviewsManager hotelId={hotel.id} />
             <ReactQueryDevtools initialIsOpen={false} />
           </ClientProvider>
         </Box>

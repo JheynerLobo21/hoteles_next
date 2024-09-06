@@ -65,6 +65,7 @@ export const descriptionHotelStyles: SxProps<Theme> =  ({
     display: 'flex',
     flexDirection:'column',
     marginLeft: '22px',
+    position:'relative',
     '@media (max-width: 768px)': {
         marginLeft: 0,
         flexDirection: 'column',
@@ -164,8 +165,10 @@ export const boxStyles: SxProps<Theme> = {
   export const cardReview: SxProps<Theme> = {
     border: 'none',
     boxShadow: 'none',
-    marginTop: '15px',
-    minWidth: '850px',
+    borderRadius: '5px',
+    marginBottom: '15px',
+    width: '100%',
+    padding: '0',
   };
   
   export const descriptionReview: SxProps<Theme> = {
@@ -276,7 +279,6 @@ export const boxStyles: SxProps<Theme> = {
     color: '#fff',
     padding: '1px 5px',
     borderRadius: '5px',
-    
     '&:hover': {
       backgroundColor: '#04027c',
     },
@@ -284,15 +286,27 @@ export const boxStyles: SxProps<Theme> = {
 
   export const btnEditButton: SxProps<Theme>={
     position: 'absolute',
-    right: '20px',
+    right: '50px',
+    top: '0',
     marginTop:"2px",
     borderRadius: '4px',
-    width:"30px",
+    width:"10px",
     height:"30px",
     '&:hover': {
-      backgroundColor: '#2724db',
-      color:"#fff",
-      width:"29px",
+      color:'#2724db',
+    },
+  }
+
+  export const btnDeleteButton:SxProps<Theme>={
+    position: 'absolute',
+    right: '10px',
+    top: '0',
+    marginTop:"2px",
+    borderRadius: '4px',
+    width:"10px",
+    height:"30px",
+    '&:hover': {
+      color:'#2724db',
     },
   }
 
