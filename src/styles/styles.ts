@@ -66,6 +66,7 @@ export const descriptionHotelStyles: SxProps<Theme> =  ({
     flexDirection:'column',
     marginLeft: '22px',
     position:'relative',
+    width:'100%',
     '@media (max-width: 768px)': {
         marginLeft: 0,
         flexDirection: 'column',
@@ -99,7 +100,6 @@ export const boxStyles: SxProps<Theme> = {
   export const itemHotel: SxProps<Theme> = {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
     paddingBottom: 0,
     '@media (max-width: 768px)': {
       flexDirection: 'column',
@@ -160,6 +160,11 @@ export const boxStyles: SxProps<Theme> = {
   
   export const btnAddReview: SxProps<Theme> = {
     color: '#fff',
+    position: 'absolute',
+    top: '50px',
+    right:'127px',
+    backgroundColor:"#2724db",
+    width:"160px"
   };
   
   export const cardReview: SxProps<Theme> = {
@@ -286,7 +291,7 @@ export const boxStyles: SxProps<Theme> = {
 
   export const btnEditButton: SxProps<Theme>={
     position: 'absolute',
-    right: '50px',
+    right: '0',
     top: '0',
     marginTop:"2px",
     borderRadius: '4px',
