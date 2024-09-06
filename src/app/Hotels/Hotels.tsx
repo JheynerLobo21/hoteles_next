@@ -1,6 +1,6 @@
 import { Hotel } from "@/types/interfaceHotel";
 import CardHotel from "@/Components/CardHotel";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import AddHotel from "./AddHotel";
 
 interface Props {
@@ -14,13 +14,18 @@ export default function Hotels({ hotels, addHotel, editHotel }: Props) {
     return (
       <Typography variant="h5">No se pudo encontrar ningún hotel</Typography>
     );
-    
-  return hotels.map((hotel: Hotel) => (
-    <>
-      <AddHotel addHotel={addHotel} />
-      <CardHotel hotel={hotel} key={hotel.id} editHotel={editHotel} />
+
+  return (    
+  <>
+    <AddHotel addHotel={addHotel}/>
+    {hotels.map((hotel: Hotel) => (
+    <Box key={hotel.id}>
+    <CardHotel hotel={hotel} editHotel={editHotel} />
+    </Box>
+  ))};
     </>
-  ));
+  )
+  
 }
 
 // import { Hotel } from "@/types/interfaceHotel";
