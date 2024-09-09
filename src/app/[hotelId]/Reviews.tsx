@@ -1,25 +1,21 @@
-
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { Review } from "@/types/interfaceHotel";
 import RegistreReview from "./RegistreReview";
 import BasicRating from "@/Components/Rating";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Unstable_Grid2";
 import {
-  containerReviews,
-  cardReview,
   txtTitleDescriptionReview,
-  titleRateReviews,
-  descriptionReview,
   txtDescriptionReview,
   listReviews,
   titleAdd,
   btnDeleteButton,
 } from "@/styles/styles";
-import { Button, FormLabel } from "@mui/material";
-import styles from '@/app/page.module.css';
+import { Button, Container, FormLabel } from "@mui/material";
+import styles from "@/app/page.module.css";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useDeleteReview } from "@/hooks/mutations/Reviews/useDeleteReview";
 import { useRouter } from "next/navigation";
@@ -42,15 +38,15 @@ const bull = (
 
 export const Reviews = ({ reviews, hotelId, addReview, editReview }: Prop) => {
   const LinkIcon = TrashIcon;
-  const router= useRouter();
+  const router = useRouter();
   const { mutate: deleteReview } = useDeleteReview();
 
-const handleDelete = (reviewId: number) => {
-  router.push(`${hotelId}/?review=${reviewId}`)
+  const handleDelete = (reviewId: number) => {
+    router.push(`${hotelId}/?review=${reviewId}`);
     deleteReview(reviewId);
-};
+  };
   return (
-    <Box sx={listReviews}>
+    <Container sx={listReviews}>
       <Box sx={titleAdd}>
         <Typography variant="h5">Reseñas del Hotel</Typography>
         <RegistreReview
@@ -61,26 +57,29 @@ const handleDelete = (reviewId: number) => {
         />
       </Box>
       {reviews.map((review) => (
-        <Card key={review.id} sx={cardReview}>
-          <CardContent sx={containerReviews}>
-            <Typography component={"section"} sx={titleRateReviews}>
-              <Typography variant="h6">Título: {review.title}</Typography>
+        <Paper elevation={3} key={review.id} sx={{ marginBottom: "25px" }}>
+          <Grid
+            container
+            spacing={2}
+            sx={{ textAlign: "center", position: "relative" }}
+          >
+            <Grid sm={12} md={4}>
+              <Typography variant="h6"> {review.title}</Typography>
               <FormLabel>Calificación:</FormLabel>
               <BasicRating rating={review.rating} />
-            </Typography>
-            <Box component={"section"} sx={descriptionReview}>
+            </Grid>
+            <Grid sm={12} md={8}>
               <RegistreReview
                 hotelId={hotelId}
                 editReview={editReview}
                 addReview={addReview}
                 review={review}
               />
-
-              <Button 
+              <Button
                 onClick={() => handleDelete(review.id)}
                 sx={btnDeleteButton}
               >
-                <LinkIcon className={styles.btnEditButton}/>
+                <LinkIcon className={styles.btnEditButton} />
               </Button>
               <Typography component={"label"} sx={txtTitleDescriptionReview}>
                 Descripción
@@ -88,10 +87,10 @@ const handleDelete = (reviewId: number) => {
               <Typography sx={txtDescriptionReview} component={"label"}>
                 {review.description}
               </Typography>
-            </Box>
-          </CardContent>
-        </Card>
+            </Grid>
+          </Grid>
+        </Paper>
       ))}
-    </Box>
+    </Container>
   );
 };

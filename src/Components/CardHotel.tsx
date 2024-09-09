@@ -1,11 +1,12 @@
-'use client'
+"use client";
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { Hotel } from "@/types/interfaceHotel";
 import styles from "@/app/page.module.css";
-import {itemHotel, cardDataHotel, nameRating, titleHotel, dataHotel} from "@/styles/styles";
+import { Grid } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import { titleHotel } from "@/styles/styles";
 import Image from "next/image";
 import Link from "next/link";
 import BasicRating from "@/Components/Rating";
@@ -14,15 +15,14 @@ import EditHotel from "@/app/Hotels/EditHotel";
 
 interface Prop {
   hotel: Hotel;
-  editHotel: (hotel:Hotel) => void;
+  editHotel?: (hotel: Hotel) => void;
 }
 
 export default function CardHotel({ hotel, editHotel }: Prop) {
-
   return (
-    <Card sx={cardDataHotel}>
-      <CardContent key={hotel.id} sx={itemHotel}>
-        <Typography gutterBottom>
+    <Paper elevation={3} sx={{ padding: 2 }}>
+      <Grid container spacing={2} direction={{ md: "row" }}>
+        <Grid item xs={12} md={3} sx={{ padding: 2 }}>
           <Image
             className={styles.imgHotel}
             src={hotel.thumbnail}
@@ -30,21 +30,24 @@ export default function CardHotel({ hotel, editHotel }: Prop) {
             width={200}
             height={200}
           />
-        </Typography>
-        <Box sx={dataHotel}>
-          <EditHotel editHotel={editHotel} hotel={hotel} />
-          <Typography component={'span'} sx={nameRating}>
-            <Link href={`/${hotel.id}`}>
-            <Typography variant='h2' sx={titleHotel}>
-            {hotel.title}
+        </Grid>
+        <Grid item xs={12} md={9}>
+          <Stack spacing={1}>
+            <EditHotel editHotel={editHotel ?? (() => {})} hotel={hotel} />
+            <Box sx={{ display: "flex" }}>
+              <Link href={`/${hotel.id}`}>
+                <Typography variant="h2" sx={titleHotel}>
+                  {hotel.title}
+                </Typography>
+              </Link>
+              <BasicRating rating={hotel.rating} />
+            </Box>
+            <Typography component="span" variant="body2">
+              {hotel.description}
             </Typography>
-            </Link>
-            <BasicRating rating={hotel.rating} />
-          </Typography>
-          <Typography component={'span'} variant="body2">{hotel.description}</Typography>
-        </Box>
-      </CardContent>
-    </Card>
+          </Stack>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 }
-

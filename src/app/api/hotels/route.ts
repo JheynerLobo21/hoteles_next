@@ -41,15 +41,15 @@ export async function PUT(req: Request) {
     if (!response.ok) {
       const errorData = await response.json();
       console.error('Error response from server:', errorData);
-      return Response.json({ error: errorData.message || 'Failed to update review' }, { status: response.status });
+      return NextResponse.json({ error: errorData.message || 'Failed to update review' }, { status: response.status });
     }
 
     const updatedHotel = await response.json();
     console.log("EDITO EL HOTEL")
-    return Response.json(updatedHotel, { status: 200 });
+    return NextResponse.json(updatedHotel, { status: 200 });
   } catch (error) {
     console.error('Error updating review:', error);
-    return Response.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
 

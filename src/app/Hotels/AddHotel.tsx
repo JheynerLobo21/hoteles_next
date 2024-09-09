@@ -11,7 +11,6 @@ import React from "react";
 import {
   style,
   btnAddReview,
-  addNewReview,
   close,
   titleModal,
   form,
@@ -20,9 +19,9 @@ import {
   scoreReview,
   btnNewReview,
   containerBtnNewReview,
+  containerAddHotels,
 } from "@/styles/styles";
 import { Hotel } from "@/types/interfaceHotel";
-import { PencilIcon } from "@heroicons/react/24/outline";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
@@ -43,7 +42,6 @@ interface Prop {
 }
 
 export default function AddHotel({ addHotel }: Prop) {
-  const LinkIcon = PencilIcon;
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = React.useState<Hotel>({
     id: Math.round(Math.random() * 1000),
@@ -73,12 +71,11 @@ export default function AddHotel({ addHotel }: Prop) {
     }
   };
 
-
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files[0]) {
       const file = files[0];
-      
+
       if (!file.type.startsWith("image/")) {
         return;
       }
@@ -93,7 +90,7 @@ export default function AddHotel({ addHotel }: Prop) {
       reader.readAsDataURL(file);
     }
   };
-  
+
   const handleForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
@@ -105,7 +102,7 @@ export default function AddHotel({ addHotel }: Prop) {
   };
 
   return (
-    <Box sx={addNewReview}>
+    <Box sx={containerAddHotels}>
       <Button onClick={handleOpen} sx={btnAddReview}>
         Agregar hotel
       </Button>

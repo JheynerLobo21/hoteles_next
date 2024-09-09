@@ -18,13 +18,13 @@ import {
   divScoreReview,
   scoreReview,
   btnNewReview,
+  containerEditHotel,
   containerBtnNewReview,
 } from "@/styles/styles";
 import styles from "@/app/page.module.css";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { Hotel } from "@/types/interfaceHotel";
 import { styled } from "@mui/material/styles";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -77,7 +77,7 @@ export default function EditHotel({ editHotel, hotel }: Prop) {
   };
 
   return (
-    <Box>
+    <Box sx={containerEditHotel}>
       <Button onClick={handleOpen} sx={btnEditButton}>
         <LinkIcon className={styles.btnEditButton} />
       </Button>

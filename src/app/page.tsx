@@ -1,33 +1,19 @@
-import { Box, Typography } from "@mui/material";
+import { Container, Typography, Stack } from "@mui/material";
 import { titleApp, mainApp } from "@/styles/styles";
 import HotelManager from "@/Components/HotelManager";
 import ClientProvider from "./[hotelId]/ClientProvider";
 
 export default function Home() {
   return (
-    <Box sx={mainApp}>
+    <Container sx={mainApp} maxWidth="md">
       <Typography variant="h1" sx={titleApp}>
         Hoteles
       </Typography>
       <ClientProvider>
-        <HotelManager />
+        <Stack spacing={4}>
+          <HotelManager />
+        </Stack>
       </ClientProvider>
-    </Box>
+    </Container>
   );
 }
-
-// import { Box, Typography } from "@mui/material";
-// import { titleApp, mainApp } from "@/styles/styles";
-// import Hotels from '@/app/Hotels/Hotels'
-// import ClientProvider from "./[hotelId]/ClientProvider";
-
-// export default function Home() {
-//   return (
-//     <Box sx={mainApp}>
-//       <Typography variant='h1' sx={titleApp}>Hoteles</Typography>
-//       <ClientProvider>
-//       <Hotels/>
-//       </ClientProvider>
-//     </Box>
-//   );
-// }
