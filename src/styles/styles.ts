@@ -1,3 +1,4 @@
+
 import { SxProps, Theme } from "@mui/material";
 
 export const mainApp: SxProps<Theme> = {
@@ -5,7 +6,7 @@ export const mainApp: SxProps<Theme> = {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "6rem",
+  paddingBottom: "2rem",
   backgroundColor: "#eef",
   color: "rgb(31, 30, 30)",
 };
@@ -34,10 +35,6 @@ export const containerReviews: SxProps<Theme> = {
   display: "flex",
   width: "100%",
   padding: 0,
-  "@media (max-width: 768px)": {
-    flexDirection: "column",
-    width: "63%",
-  },
 };
 
 export const titleRateReviews: SxProps<Theme> = {
@@ -57,10 +54,10 @@ export const titleRateReviews: SxProps<Theme> = {
   },
 };
 
-export const btnAddReview: SxProps<Theme> = {
+export const btnAddHotel: SxProps<Theme> = {
   color: "#fff",
   position: "absolute",
-  top: "-40px",
+  top: "-20px",
   right: "0",
   backgroundColor: "#2724db",
   width: "160px",
@@ -68,6 +65,24 @@ export const btnAddReview: SxProps<Theme> = {
     backgroundColor: "#04027c",
   },
 };
+
+export const btnAddReview: SxProps<Theme> = {
+  color: "#fff",
+  position: "absolute",
+  top: "-37px",
+  right: "0",
+  backgroundColor: "#2724db",
+  width: "160px",
+  "&:hover": {
+    backgroundColor: "#04027c",
+  },
+};
+
+export const containerImgHotel: SxProps<Theme> = {
+  display:"flex", 
+  justifyContent:"center", 
+  alignItems:"center",
+}
 
 export const containerAddHotels: SxProps<Theme> = {
   position: "relative",
@@ -85,28 +100,6 @@ export const containerEditHotel: SxProps<Theme> = {
   position: "relative",
 };
 
-export const descriptionReview: SxProps<Theme> = {
-  borderRadius: "0 8px 8px 0",
-  marginRight: "1px",
-  fontSize: "14px",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  textAlign: "center",
-  width: "70%",
-  textOverflow: "ellipsis",
-  position: "relative",
-  "@media (max-width: 768px)": {
-    borderRadius: "0 0 8px 8px",
-    marginTop: "-1px",
-    height: "100px",
-    overflow: "scroll",
-    padding: "0 10px",
-    textAlign: "center",
-  },
-};
-
 export const txtTitleDescriptionReview: SxProps<Theme> = {
   fontSize: "18px",
   fontWeight: "bold",
@@ -114,10 +107,11 @@ export const txtTitleDescriptionReview: SxProps<Theme> = {
   display: "flex",
   textAlign: "center",
   justifyContent: "center",
+  padding: "10px 0",
 };
 
 export const txtDescriptionReview: SxProps<Theme> = {
-  marginTop: "10px",
+  padding: "15px",
 };
 
 export const form: SxProps<Theme> = {
@@ -136,6 +130,10 @@ export const reviewField: SxProps<Theme> = {
 
 export const scoreReview: SxProps<Theme> = {
   textAlign: "center",
+  display:"flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 export const containerBtnNewReview: SxProps<Theme> = {
@@ -154,7 +152,7 @@ export const btnNewReview: SxProps<Theme> = {
 };
 
 export const titleApp: SxProps<Theme> = {
-  marginTop: "-50px",
+  marginTop: "20px",
   marginBottom: "20px",
   textAlign: "center",
   fontSize: "28px",
@@ -190,24 +188,36 @@ export const divScoreReview: SxProps<Theme> = {
 export const btnEditButton: SxProps<Theme> = {
   position: "absolute",
   right: "40px",
-  top: "-8px",
-  marginTop: "2px",
+  top: "0",
   borderRadius: "4px",
-  width: "10px",
-  height: "30px",
   "&:hover": {
     color: "#2724db",
   },
+  "@media (max-width:900px)":{
+    top:"37px",
+    right: "0"
+  }
 };
+
+export const btnEditReview:SxProps<Theme> = {
+  position: "absolute",
+  right: "50px",
+  top: "-3px",
+  borderRadius: "4px",
+  "&:hover": {
+    color: "#2724db",
+  },
+  "@media (max-width:900px)":{
+    top:"-70px",
+    right: "5px"
+  }
+}
 
 export const btnDeleteButton: SxProps<Theme> = {
   position: "absolute",
   right: "10px",
   top: "0",
-  marginTop: "2px",
   borderRadius: "4px",
-  width: "10px",
-  height: "30px",
   "&:hover": {
     color: "#2724db",
   },
@@ -235,8 +245,8 @@ export const style: SxProps<Theme> = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
+  width: "40%",
   transform: "translate(-50%, -50%)",
-  width: 350,
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: 3,
@@ -246,4 +256,28 @@ export const style: SxProps<Theme> = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+  "@media (max-width: 900px)":{
+    width: "85%",
+  }
 };
+
+export const titleRate: SxProps<Theme> = {
+  display: "flex",
+  "@media (max-width: 900px)": {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  },
+}
+
+export const titleRateReview: SxProps<Theme> = {
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+  justifyContent: "center",
+  "@media (max-width: 900px)": {
+    width: "100%",
+  }
+}
+

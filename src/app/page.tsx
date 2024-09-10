@@ -10,7 +10,7 @@ export default function Home() {
         Hoteles
       </Typography>
       <ClientProvider>
-        <Stack spacing={4}>
+        <Stack spacing={3}>
           <HotelManager />
         </Stack>
       </ClientProvider>

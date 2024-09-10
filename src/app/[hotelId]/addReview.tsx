@@ -19,9 +19,9 @@ import {
   scoreReview,
   btnNewReview,
   containerBtnNewReview,
+  containerAddHotels,
 } from "@/styles/styles";
 import { Review } from "@/types/interfaceHotel";
-import { PencilIcon } from "@heroicons/react/24/outline";
 
 interface Prop {
   hotelId: number;
@@ -29,7 +29,6 @@ interface Prop {
 }
 
 export default function AddReview({ hotelId, addReview }: Prop) {
-  const LinkIcon = PencilIcon;
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = React.useState<Review>({
     id: Math.round(Math.random() * 1000),

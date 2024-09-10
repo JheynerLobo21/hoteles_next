@@ -10,7 +10,7 @@ import { FormLabel } from "@mui/material";
 import React from "react";
 import {
   style,
-  btnAddReview,
+  btnAddHotel,
   close,
   titleModal,
   form,
@@ -103,7 +103,7 @@ export default function AddHotel({ addHotel }: Prop) {
 
   return (
     <Box sx={containerAddHotels}>
-      <Button onClick={handleOpen} sx={btnAddReview}>
+      <Button onClick={handleOpen} sx={btnAddHotel}>
         Agregar hotel
       </Button>
       <Modal
@@ -147,7 +147,7 @@ export default function AddHotel({ addHotel }: Prop) {
                 />
               </FormLabel>
             </Box>
-            <Box>
+            <Box sx={{display:"flex", justifyContent:"center"}}>
               <Button
                 component="label"
                 role={undefined}
@@ -155,7 +155,7 @@ export default function AddHotel({ addHotel }: Prop) {
                 tabIndex={-1}
                 startIcon={<CloudUploadIcon />}
               >
-                Cargar imagen
+                {formData.thumbnail==="" ? "Cargar imagen" : "Imagen cargada"}                
                 <VisuallyHiddenInput
                   type="file"
                   onChange={handleImageChange}

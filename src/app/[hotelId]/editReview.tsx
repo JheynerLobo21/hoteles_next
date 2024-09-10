@@ -10,7 +10,7 @@ import { FormLabel } from "@mui/material";
 import React from "react";
 import {
   style,
-  btnEditButton,
+  btnEditReview,
   close,
   titleModal,
   form,
@@ -64,7 +64,7 @@ export default function EditReview({ editReview, review }: Prop) {
 
   return (
     <Box sx={{ position: "relative" }}>
-      <Button onClick={handleOpen} sx={btnEditButton}>
+      <Button onClick={handleOpen} sx={btnEditReview}>
         <LinkIcon className={styles.btnEditButton} />
       </Button>
       <Modal

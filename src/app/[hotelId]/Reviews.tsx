@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import { Review } from "@/types/interfaceHotel";
 import RegistreReview from "./RegistreReview";
 import BasicRating from "@/Components/Rating";
-import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Unstable_Grid2";
 import {
   txtTitleDescriptionReview,
@@ -13,6 +12,7 @@ import {
   listReviews,
   titleAdd,
   btnDeleteButton,
+  titleRateReview,
 } from "@/styles/styles";
 import { Button, Container, FormLabel } from "@mui/material";
 import styles from "@/app/page.module.css";
@@ -60,10 +60,10 @@ export const Reviews = ({ reviews, hotelId, addReview, editReview }: Prop) => {
         <Paper elevation={3} key={review.id} sx={{ marginBottom: "25px" }}>
           <Grid
             container
-            spacing={2}
-            sx={{ textAlign: "center", position: "relative" }}
+            spacing={1}
+            sx={{ textAlign: "center", position: "relative"}}
           >
-            <Grid sm={12} md={4}>
+            <Grid md={4} sx={titleRateReview}>
               <Typography variant="h6"> {review.title}</Typography>
               <FormLabel>Calificación:</FormLabel>
               <BasicRating rating={review.rating} />

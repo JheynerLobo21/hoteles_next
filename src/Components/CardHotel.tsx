@@ -6,7 +6,7 @@ import { Hotel } from "@/types/interfaceHotel";
 import styles from "@/app/page.module.css";
 import { Grid } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import { titleHotel } from "@/styles/styles";
+import { titleHotel, titleRate, containerImgHotel } from "@/styles/styles";
 import Image from "next/image";
 import Link from "next/link";
 import BasicRating from "@/Components/Rating";
@@ -20,9 +20,9 @@ interface Prop {
 
 export default function CardHotel({ hotel, editHotel }: Prop) {
   return (
-    <Paper elevation={3} sx={{ padding: 2 }}>
-      <Grid container spacing={2} direction={{ md: "row" }}>
-        <Grid item xs={12} md={3} sx={{ padding: 2 }}>
+    <Paper elevation={3} >
+      <Grid container spacing={1} direction={{ md: "row" }}>
+        <Grid item xs={12} md={3} sx={containerImgHotel}>
           <Image
             className={styles.imgHotel}
             src={hotel.thumbnail}
@@ -33,8 +33,10 @@ export default function CardHotel({ hotel, editHotel }: Prop) {
         </Grid>
         <Grid item xs={12} md={9}>
           <Stack spacing={1}>
-            <EditHotel editHotel={editHotel ?? (() => {})} hotel={hotel} />
-            <Box sx={{ display: "flex" }}>
+            {editHotel && (
+              <EditHotel editHotel={editHotel ?? (() => {})} hotel={hotel} />
+            )}
+            <Box sx={titleRate}>
               <Link href={`/${hotel.id}`}>
                 <Typography variant="h2" sx={titleHotel}>
                   {hotel.title}
@@ -42,7 +44,7 @@ export default function CardHotel({ hotel, editHotel }: Prop) {
               </Link>
               <BasicRating rating={hotel.rating} />
             </Box>
-            <Typography component="span" variant="body2">
+            <Typography component="span" sx={{padding:"5px 10px 5px 10px"}}>
               {hotel.description}
             </Typography>
           </Stack>

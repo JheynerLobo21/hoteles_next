@@ -1,6 +1,6 @@
 import { Hotel } from "@/types/interfaceHotel";
 import CardHotel from "@/Components/CardHotel";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import AddHotel from "./AddHotel";
 
 interface Props {

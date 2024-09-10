@@ -4,7 +4,7 @@ import BasicBreadcrumbs from "@/Components/Breadchumbs";
 import CardHotel from "@/Components/CardHotel";
 import { reviewsForHotel } from "@/Utils/peticions";
 import ClientProvider from "./ClientProvider";
-import { Box, Container } from "@mui/material";
+import {  Container } from "@mui/material";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export default async function DetailHotel({
