@@ -24,7 +24,6 @@ import {
 import styles from "@/app/page.module.css";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { Hotel } from "@/types/interfaceHotel";
-import { styled } from "@mui/material/styles";
 
 interface Prop {
   hotel: Hotel;

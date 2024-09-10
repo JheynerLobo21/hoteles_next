@@ -1,7 +1,7 @@
 import { Container, Typography, Stack } from "@mui/material";
 import { titleApp, mainApp } from "@/styles/styles";
 import HotelManager from "@/Components/HotelManager";
-import ClientProvider from "./[hotelId]/ClientProvider";
+import ClientProvider from "./ClientProvider";
 
 export default function Home() {
   return (
@@ -10,9 +10,7 @@ export default function Home() {
         Hoteles
       </Typography>
       <ClientProvider>
-        <Stack spacing={3}>
           <HotelManager />
-        </Stack>
       </ClientProvider>
     </Container>
   );

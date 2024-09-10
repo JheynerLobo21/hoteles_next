@@ -19,7 +19,7 @@ export default function Hotels({ hotels, addHotel, editHotel }: Props) {
     <>
       <AddHotel addHotel={addHotel} />
       {hotels.map((hotel: Hotel) => (
-        <CardHotel hotel={hotel} editHotel={editHotel} key={hotel.id} />
+        <CardHotel hotel={hotel} editHotel={editHotel} key={hotel.id}/>
       ))}
     </>
   );

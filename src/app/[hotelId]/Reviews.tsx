@@ -44,6 +44,7 @@ export const Reviews = ({ reviews, hotelId, addReview, editReview }: Prop) => {
   const handleDelete = (reviewId: number) => {
     router.push(`${hotelId}/?review=${reviewId}`);
     deleteReview(reviewId);
+    router.push(`${hotelId}`);
   };
   return (
     <Container sx={listReviews}>

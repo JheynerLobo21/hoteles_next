@@ -1,8 +1,8 @@
 "use client";
 
 import { Review } from "@/types/interfaceHotel";
-import AddReview from "./addReview";
-import EditReview from "./editReview";
+import AddReview from "./AddReview";
+import EditReview from "./EditReview";
 
 interface Prop {
   hotelId: number;

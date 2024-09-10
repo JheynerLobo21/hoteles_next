@@ -280,4 +280,3 @@ export const titleRateReview: SxProps<Theme> = {
     width: "100%",
   }
 }
-

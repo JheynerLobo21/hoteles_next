@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Hotel } from "@/types/interfaceHotel";
-import { deleteReview } from "@/Utils/peticions";
+import { deleteHotel } from "@/Utils/peticions";
 
 export function useDeleteHotel() {
-  const queryClient = useQueryClient();
+  
+    const queryClient = useQueryClient();
   
     return useMutation({
-      mutationFn: (hotelId: number) => deleteReview(hotelId),
+      mutationFn: (hotelId: number) => deleteHotel(hotelId),
       onSuccess: (data, hotelId) => {
         console.log(data, hotelId);
         //queryClient.invalidateQueries({queryKey: ['reviews', hotelId]})
@@ -18,7 +19,7 @@ export function useDeleteHotel() {
         }
       },
       onError: (error) => {
-        console.error('Error deleting hotel:', error);
+        console.error('Error deleting review:', error);
       },
     });
   }

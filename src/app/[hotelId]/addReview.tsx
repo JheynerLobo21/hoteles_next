@@ -19,7 +19,6 @@ import {
   scoreReview,
   btnNewReview,
   containerBtnNewReview,
-  containerAddHotels,
 } from "@/styles/styles";
 import { Review } from "@/types/interfaceHotel";
 

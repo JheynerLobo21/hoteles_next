@@ -2,7 +2,6 @@
 import { Hotel } from "@/types/interfaceHotel";
 import Loading from "./loading";
 import { useUpdateHotel } from "@/hooks/mutations/Hotels/useUpdateHotel";
-//import { useDeleteHotel } from "@/hooks/mutations/Hotels/useDeleteHotel";
 import { Typography } from "@mui/material";
 import { useCreateHotel } from "@/hooks/mutations/Hotels/useCreateHotel";
 import Hotels from "@/app/Hotels/Hotels";
@@ -11,7 +10,6 @@ export default function HotelManager() {
   const query = useHotelQuery();
   const { mutate: hotelAdd } = useCreateHotel();
   const { mutate: hotelUpdate } = useUpdateHotel();
-  //const { mutate: hotelDelete } = useDeleteHotel();
 
   if (query.isFetching) return <Loading />;
 
@@ -27,6 +25,6 @@ export default function HotelManager() {
   };
 
   return (
-    <Hotels hotels={query.data} addHotel={addHotel} editHotel={editHotel} />
+    <Hotels hotels={query.data} addHotel={addHotel} editHotel={editHotel}/>
   );
 }
