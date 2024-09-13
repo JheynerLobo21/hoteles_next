@@ -8,6 +8,10 @@ import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import { FormLabel } from "@mui/material";
 import React from "react";
+import { Review } from "@/types/interfaceHotel";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { reviewSchema } from "../Hotels/Validations";
 import {
   style,
   btnEditReview,
@@ -22,7 +26,7 @@ import {
 } from "@/styles/styles";
 import styles from "@/app/page.module.css";
 import { PencilIcon } from "@heroicons/react/24/outline";
-import { Review } from "@/types/interfaceHotel";
+
 
 interface Prop {
   review: Review;
@@ -32,33 +36,27 @@ interface Prop {
 export default function EditReview({ editReview, review }: Prop) {
   const LinkIcon = PencilIcon;
   const [open, setOpen] = React.useState<boolean>(false);
-  const [formData, setFormData] = React.useState<Review>({ ...review });
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setOpen(false)
 
-  const handleForm = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    const { id, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<Review>({
+    resolver: yupResolver<any>(reviewSchema),
+    defaultValues: {
+      id: review.id,
+      title: review.title,
+      description: review.description,
+      rating: review.rating,
+      hotelId: review.hotelId,
+    },
+  });
 
-  const handleRatingChange = (
-    event: React.SyntheticEvent,
-    newValue: number | null
-  ) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      rating: newValue || 0,
-    }));
-  };
-
-  const handleEditReview = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    editReview(formData);
+  const onSubmit = (data: Review) => {
+    console.log("entro a on submit")
+    editReview({ ...data, id:review.id, hotelId:review.hotelId});
     handleClose();
   };
 
@@ -83,41 +81,61 @@ export default function EditReview({ editReview, review }: Prop) {
           >
             Editar reseña
           </Typography>
-          <Box component={"form"} sx={form} onSubmit={handleEditReview}>
+          <Box component={"form"} sx={form} onSubmit={handleSubmit(onSubmit)}>
             <Box>
               <FormLabel htmlFor="title-review" sx={reviewField}>
                 Título de la reseña
-                <TextField
-                  id="title"
-                  type="text"
-                  onChange={handleForm}
-                  value={formData.title}
-                  required
+                <Controller
+                  name="title"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      id="title"
+                      type="text"
+                      {...field}
+                      error={!!errors.title}
+                      helperText={errors.title?.message}
+                      required
+                    />
+                  )}
                 />
               </FormLabel>
             </Box>
             <Box>
               <FormLabel htmlFor="description-review" sx={reviewField}>
                 Descripción de la reseña
+                <Controller
+                name="description"
+                control={control}
+                render={({ field }) => (
                 <TextField
                   id="description"
                   type="text"
                   multiline
                   maxRows={4}
-                  onChange={handleForm}
+                  {...field}
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
                   required
-                  value={formData.description}
+                />)}
                 />
               </FormLabel>
             </Box>
             <Box sx={divScoreReview}>
               <FormLabel htmlFor="score-review" sx={scoreReview}>
                 Valoración de la reseña
-                <Rating
-                  name="simple-controlled"
-                  value={formData.rating}
-                  onChange={handleRatingChange}
-                  id="rating"
+                <Controller
+                  name="rating"
+                  control={control}
+                  render={({ field }) => (
+                    <Rating
+                      name="simple-controlled"
+                      value={field.value}
+                      onChange={(_, newValue) => {
+                        field.onChange(newValue || 0);
+                      }}
+                    />
+                  )}
                 />
               </FormLabel>
             </Box>

@@ -8,6 +8,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import Modal from "@mui/material/Modal";
 import { FormLabel } from "@mui/material";
 import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { reviewSchema } from "../Hotels/Validations";
 import {
   style,
   btnAddReview,
@@ -29,42 +32,36 @@ interface Prop {
 
 export default function AddReview({ hotelId, addReview }: Prop) {
   const [open, setOpen] = React.useState(false);
-  const [formData, setFormData] = React.useState<Review>({
-    id: Math.round(Math.random() * 1000),
-    title: "",
-    description: "",
-    rating: 0,
-    hotelId: hotelId,
+  
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    reset,
+  } = useForm<Review>({
+    resolver: yupResolver<Review>(reviewSchema),
+    defaultValues: {
+      id: Math.round(Math.random() * 1000),
+      title: "",
+      description: "",
+      rating: 0,
+      hotelId: hotelId,
+    },
   });
+
+  
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleRatingChange = (
-    event: React.SyntheticEvent,
-    newValue: number | null
-  ) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      rating: newValue || 0,
-    }));
+  const handleClose = () => {
+      reset(); 
+      setOpen(false);
   };
 
-  const handleAddReview = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.title && formData.description && formData.rating) {
-      addReview(formData);
-      handleClose();
-    }
-  };
 
-  const handleForm = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    const { id, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
+  const onSubmit = (data: Review) => {
+    const id = Math.round(Math.random() * 1000);
+    console.log("entro a on submit")
+    addReview({ ...data, id, hotelId });
+    handleClose();
   };
 
   return (
@@ -88,43 +85,65 @@ export default function AddReview({ hotelId, addReview }: Prop) {
           >
             Registre una reseña
           </Typography>
-          <Box component={"form"} sx={form} onSubmit={handleAddReview}>
+          <Box component={"form"} sx={form} onSubmit={handleSubmit(onSubmit)}>
             <Box>
               <FormLabel htmlFor="title-review" sx={reviewField}>
                 Título de la reseña
+                <Controller
+                name="title"
+                control={control}
+                render={({ field }) => (
                 <TextField
                   id="title"
                   type="text"
-                  onChange={handleForm}
-                  required
+                  {...field}
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
+                />)}
                 />
               </FormLabel>
             </Box>
             <Box>
               <FormLabel htmlFor="description-review" sx={reviewField}>
                 Descripción de la reseña
+                <Controller
+                name="description"
+                control={control}
+                render={({ field }) => (
                 <TextField
                   id="description"
                   type="text"
                   multiline
                   maxRows={4}
-                  onChange={handleForm}
+                  {...field}
+                  error={!!errors.description}
+                  helperText={errors.description?.message}
                   required
+                />)}
                 />
               </FormLabel>
             </Box>
             <Box sx={divScoreReview}>
               <FormLabel htmlFor="score-review" sx={scoreReview}>
                 Valoración de la reseña
-                <Rating
-                  name="simple-controlled"
-                  value={formData.rating}
-                  onChange={handleRatingChange}
-                  id="rating"
+                <Controller
+                  name="rating"
+                  control={control}
+                  render={({ field }) => (
+                    <Rating
+                      name="simple-controlled"
+                      value={field.value}
+                      onChange={(_, newValue) => {
+                        field.onChange(newValue || 0);
+                      }}
+                    />
+                  )}
                 />
               </FormLabel>
+              {errors.rating && (
+                <Typography color="error">{errors.rating.message}</Typography>
+              )}
             </Box>
-
             <Box sx={containerBtnNewReview}>
               <Button variant="contained" sx={btnNewReview} type="submit">
                 Agregar

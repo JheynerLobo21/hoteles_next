@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-  const { id } = params; 
-
-  if (!id) {
+export async function DELETE({ params }: { params: { review: string } }) {
+  const { review } = params; 
+  console.log(review);
+  if (!review) {
     return NextResponse.json({ error: 'Review ID is required' }, { status: 400 });
   }
-  const response = await fetch(`https://my-json-server.typicode.com/manuelmebm/testing-hotel-api/reviews/${id}`, {
+  const response = await fetch(`https://my-json-server.typicode.com/manuelmebm/testing-hotel-api/reviews/${review}`, {
     method: 'DELETE',
   });
   if (!response.ok) {

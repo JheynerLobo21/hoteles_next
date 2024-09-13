@@ -14,7 +14,6 @@ export default function Hotels({ hotels, addHotel, editHotel }: Props) {
     return (
       <Typography variant="h5">No se pudo encontrar ningún hotel</Typography>
     );
-
   return (
     <>
       <AddHotel addHotel={addHotel} />

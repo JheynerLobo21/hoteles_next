@@ -24,6 +24,9 @@ import {
 import styles from "@/app/page.module.css";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { Hotel } from "@/types/interfaceHotel";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./Validations";
 
 interface Prop {
   hotel: Hotel;
@@ -33,34 +36,27 @@ interface Prop {
 export default function EditHotel({ editHotel, hotel }: Prop) {
   const LinkIcon = PencilIcon;
   const [open, setOpen] = React.useState<boolean>(false);
-  const [formData, setFormData] = React.useState<Hotel>({ ...hotel });
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleForm = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    const { id, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<Hotel>({
+    resolver: yupResolver<any>(schema),
+    defaultValues: {
+      id: hotel.id,
+      title: hotel.title,
+      description: hotel.description,
+      rating: hotel.rating,
+      thumbnail: hotel.thumbnail,
+    },
+  });
 
-  const handleRatingChange = (
-    event: React.SyntheticEvent,
-    newValue: number | null
-  ) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      rating: newValue || 0,
-    }));
-  };
-
-  const handleEditReview = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    editHotel(formData);
-    handleClose();
+  const onSubmit = (data: Hotel) => {
+    editHotel({ ...data, id: hotel.id });
+    handleClose(); 
   };
 
   return (
@@ -84,41 +80,62 @@ export default function EditHotel({ editHotel, hotel }: Prop) {
           >
             Editar Hotel
           </Typography>
-          <Box component={"form"} sx={form} onSubmit={handleEditReview}>
+          <Box component={"form"} sx={form} onSubmit={handleSubmit(onSubmit)}>
             <Box>
               <FormLabel htmlFor="title-review" sx={reviewField}>
                 Nombre del hotel
-                <TextField
-                  id="title"
-                  type="text"
-                  onChange={handleForm}
-                  value={formData.title}
-                  required
+                <Controller
+                  name="title"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      id="title"
+                      type="text"
+                      {...field}
+                      error={!!errors.title}
+                      helperText={errors.title?.message}
+                      required
+                    />
+                  )}
                 />
               </FormLabel>
             </Box>
             <Box>
               <FormLabel htmlFor="description-review" sx={reviewField}>
                 Descripción del hotel
-                <TextField
-                  id="description"
-                  type="text"
-                  multiline
-                  maxRows={4}
-                  onChange={handleForm}
-                  required
-                  value={formData.description}
+                <Controller
+                  name="description"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      id="description"
+                      type="text"
+                      multiline
+                      maxRows={4}
+                      {...field}
+                      error={!!errors.description}
+                      helperText={errors.description?.message}
+                      required
+                    />
+                  )}
                 />
               </FormLabel>
             </Box>
             <Box sx={divScoreReview}>
               <FormLabel htmlFor="score-review" sx={scoreReview}>
                 Valoración del hotel
-                <Rating
-                  name="simple-controlled"
-                  value={formData.rating}
-                  onChange={handleRatingChange}
-                  id="rating"
+                <Controller
+                  name="rating"
+                  control={control}
+                  render={({ field }) => (
+                    <Rating
+                      name="simple-controlled"
+                      value={field.value}
+                      onChange={(_, newValue) => {
+                        field.onChange(newValue || 0);
+                      }}
+                    />
+                  )}
                 />
               </FormLabel>
             </Box>

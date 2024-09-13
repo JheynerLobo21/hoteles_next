@@ -30,7 +30,7 @@ export default function CardHotel({ hotel, editHotel }: Prop) {
   // };
 
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} sx={{marginTop:"20px", width:"100%"}}>
       <Grid container spacing={1} direction={{ md: "row" }}>
         <Grid item xs={12} md={3} sx={containerImgHotel}>
           <Image
@@ -50,7 +50,7 @@ export default function CardHotel({ hotel, editHotel }: Prop) {
               <LinkIcon className={styles.btnEditButton} />
             </Button> */}
             <Box sx={titleRate}>
-              <Link href={`/${hotel.id}`} style={{ textDecoration: "none" }}>
+              <Link href={`/${hotel.id}`} style={{ textDecoration: "none" } }>
                 <Typography variant="h2" sx={titleHotel}>
                   {hotel.title}
                 </Typography>

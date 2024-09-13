@@ -86,6 +86,7 @@ export const containerImgHotel: SxProps<Theme> = {
 
 export const containerAddHotels: SxProps<Theme> = {
   position: "relative",
+  width:"100%",
 };
 
 export const cardReview: SxProps<Theme> = {

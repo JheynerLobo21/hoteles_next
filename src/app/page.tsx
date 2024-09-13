@@ -1,4 +1,4 @@
-import { Container, Typography, Stack } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { titleApp, mainApp } from "@/styles/styles";
 import HotelManager from "@/Components/HotelManager";
 import ClientProvider from "./ClientProvider";

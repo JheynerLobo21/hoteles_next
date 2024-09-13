@@ -8,6 +8,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import Modal from "@mui/material/Modal";
 import { FormLabel } from "@mui/material";
 import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./Validations";
 import {
   style,
   btnAddHotel,
@@ -41,64 +44,37 @@ interface Prop {
   addHotel: (hotel: Hotel) => void;
 }
 
+
+
 export default function AddHotel({ addHotel }: Prop) {
   const [open, setOpen] = React.useState(false);
-  const [formData, setFormData] = React.useState<Hotel>({
-    id: Math.round(Math.random() * 1000),
-    title: "",
-    description: "",
-    rating: 0,
-    thumbnail: "",
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    reset,
+  } = useForm<Hotel>({
+    resolver: yupResolver<any>(schema),
+    defaultValues: {
+      id: Math.round(Math.random() * 1000),
+      title: "",
+      description: "",
+      rating: 0,
+      thumbnail: "",
+    },
   });
+
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleRatingChange = (
-    event: React.SyntheticEvent,
-    newValue: number | null
-  ) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      rating: newValue || 0,
-    }));
+  const handleClose = () => {
+    reset(); 
+    setOpen(false);
   };
 
-  const handleAddReview = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.title && formData.description && formData.rating) {
-      addHotel(formData);
-      handleClose();
-    }
-  };
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files[0]) {
-      const file = files[0];
-
-      if (!file.type.startsWith("image/")) {
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFormData((prevData) => ({
-          ...prevData,
-          thumbnail: reader.result as string,
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleForm = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    const { id, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
+  const onSubmit = (data: Hotel) => {
+    const id = Math.round(Math.random() * 1000);  
+    addHotel({ ...data, id });
+    handleClose(); 
   };
 
   return (
@@ -118,61 +94,97 @@ export default function AddHotel({ addHotel }: Prop) {
             sx={titleModal}
             id="modal-modal-title"
             variant="h6"
-            component="h2"
+            component="h2"                                                                     
           >
             Registre un hotel
           </Typography>
-          <Box component={"form"} sx={form} onSubmit={handleAddReview}>
+          <Box component={"form"} sx={form} onSubmit={handleSubmit(onSubmit)}>
             <Box>
               <FormLabel htmlFor="title-review" sx={reviewField}>
                 Nombre del hotel
+                <Controller
+                name="title"
+                control={control}
+                render={({ field }) => (
                 <TextField
                   id="title"
                   type="text"
-                  onChange={handleForm}
-                  required
+                  {...field}
+                  error={!!errors.title}
+                  helperText={errors.title?.message}
+                />)}
                 />
               </FormLabel>
             </Box>
             <Box>
               <FormLabel htmlFor="description-review" sx={reviewField}>
                 Descripción del hotel
+                <Controller
+                name="description"
+                control={control}
+                render={({ field }) => (
                 <TextField
                   id="description"
                   type="text"
                   multiline
                   maxRows={4}
-                  onChange={handleForm}
-                  required
+                  {...field}
+                  error={!!errors.description}
+                  helperText={errors.description?.message}
+                />)}
                 />
               </FormLabel>
             </Box>
-            <Box sx={{display:"flex", justifyContent:"center"}}>
-              <Button
-                component="label"
-                role={undefined}
-                variant="contained"
-                tabIndex={-1}
-                startIcon={<CloudUploadIcon />}
-              >
-                {formData.thumbnail==="" ? "Cargar imagen" : "Imagen cargada"}                
-                <VisuallyHiddenInput
-                  type="file"
-                  onChange={handleImageChange}
-                  multiple
-                />
-              </Button>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Controller
+                name="thumbnail"
+                control={control}
+                render={({ field }) => (
+                  <Button
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    {field.value === "" ? "Cargar imagen" : "Imagen cargada"}
+                    <VisuallyHiddenInput
+                      type="file"
+                      onChange={(event) => {
+                        const file = event.target.files?.[0];
+                        if (file) {
+                          const imageUrl = URL.createObjectURL(file);
+                          field.onChange(imageUrl);  
+                        }
+                      }}
+                    />
+                  </Button>
+                )}
+              />
+              {errors.thumbnail && (
+                <Typography color="error">{errors.thumbnail.message}</Typography>
+              )}
             </Box>
             <Box sx={divScoreReview}>
               <FormLabel htmlFor="score-review" sx={scoreReview}>
                 Valoración del hotel
-                <Rating
-                  name="simple-controlled"
-                  value={formData.rating}
-                  onChange={handleRatingChange}
-                  id="rating"
+                <Controller
+                  name="rating"
+                  control={control}
+                  render={({ field }) => (
+                    <Rating
+                      name="simple-controlled"
+                      value={field.value}
+                      onChange={(_, newValue) => {
+                        field.onChange(newValue || 0);
+                      }}
+                    />
+                  )}
                 />
               </FormLabel>
+              {errors.rating && (
+                <Typography color="error">{errors.rating.message}</Typography>
+              )}
             </Box>
 
             <Box sx={containerBtnNewReview}>
